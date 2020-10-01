@@ -8,7 +8,7 @@
  * @return float - Сумма после ежемесячного начисления процентов + сумма пополнения
  */
 function CalculateInterest($daysn, $summ_last, $summ_add, $percent, $daysy) : float {
-    return $summ_last + ($summ_last + $summ_add) * $daysn * ($percent / $daysy);
+    return $summ_last + ($summ_last + $summ_add) * $daysn * ($percent / $daysy) + $summ_add;
 }
 
 CONST PERCENT = 0.1;
@@ -36,7 +36,6 @@ while($start_date < $end_date) {
     }
 
     $result_summ = CalculateInterest($days_remaining, $result_summ, $summ_add, PERCENT, $days_year);
-    $result_summ += $summ_add;
     $start_date->add(new DateInterval("P".($days_remaining+1)."D"));
 
     $i++;

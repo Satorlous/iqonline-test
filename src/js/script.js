@@ -1,3 +1,22 @@
+const bindInputToRange = (input, range) => {
+    $(`#${input}`).on('input', function() {
+        $(`#${range}`).val(this.value).change();
+    });
+
+    $(`#${range}`).on('input', function() {
+        $(`#${input}`).val(this.value);
+    });
+}
+
+let inputRangePairs = [
+    { input: "deposit_summ", range: "range_deposit_summ" },
+    { input: "deposit_refill_summ", range: "range_refill_summ" },
+]
+
+inputRangePairs.forEach(item => {
+    bindInputToRange(item.input, item.range);
+});
+
 const setInputFilter = (textbox, inputFilter) => {
     ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
         textbox.addEventListener(event, function () {
@@ -15,24 +34,13 @@ const setInputFilter = (textbox, inputFilter) => {
     });
 }
 
-let numericOnlyInputs = [
-    "deposit_summ",
-    "deposit_refill_summ"
-]
-
-numericOnlyInputs.forEach(name => {
-    setInputFilter(document.getElementById(name), function (value) {
-        return /^\d*\.?\d*$/.test(value);
-    });
-});
+const isNumeric = (value) => {
+    return /^-?\d+\.*\d*$/.test(value);
+}
 
 const isDate = (_date) => {
     const _regExp = new RegExp('^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$');
     return _regExp.test(_date);
-}
-
-const isNumeric = (value) => {
-    return /^-?\d+\.*\d*$/.test(value);
 }
 
 const removeClassIfHas = (className, element) => {
@@ -44,6 +52,17 @@ const addClassIfAbsent = (className, element) => {
     if (!element.hasClass(`${className}`))
         element.addClass(`${className}`);
 }
+
+let numericOnlyInputs = [
+    "deposit_summ",
+    "deposit_refill_summ"
+]
+
+numericOnlyInputs.forEach(name => {
+    setInputFilter(document.getElementById(name), function (value) {
+        return /^\d*\.?\d*$/.test(value);
+    });
+});
 
 const Validate = () => {
     let deposit_summ_div = $("#summ_invalid");
@@ -71,18 +90,31 @@ const Validate = () => {
         isValidDeposit = false;
         removeClassIfHas("d-none", deposit_summ_div);
     } else {
-        isValidDeposit = true;
-        addClassIfAbsent("d-none", deposit_summ_div);
+        if(deposit_summ >= 1000) {
+            isValidDeposit = true;
+            addClassIfAbsent("d-none", deposit_summ_div);
+        }
+        else {
+            isValidDeposit = false;
+            removeClassIfHas("d-none", deposit_summ_div);
+        }
     }
 
     if (is_montlhy_refilled === "1") {
         if (!isNumeric(deposit_refill_summ)) {
             isValidRefill = false;
-           removeClassIfHas("d-none", refill_summ_div);
+            removeClassIfHas("d-none", refill_summ_div);
         }
         else {
-            isValidRefill = true;
-            addClassIfAbsent("d-none", refill_summ_div);
+            if(deposit_refill_summ >= 1000) {
+                isValidRefill = true;
+                addClassIfAbsent("d-none", refill_summ_div);
+            }
+            else {
+                isValidRefill = false;
+                removeClassIfHas("d-none", refill_summ_div);
+            }
+
         }
     }
     else addClassIfAbsent("d-none", refill_summ_div);

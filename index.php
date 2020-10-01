@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="src/styles/bootstrap.css">
     <link rel="stylesheet" href="src/styles/styles.css">
+    <link rel="stylesheet" href="src/styles/rangeslider.css">
     <title>WBP</title>
 </head>
 
@@ -77,37 +78,51 @@
 
                     <div class="form">
                         <div class="row form-row">
-                            <div class="col-4 label-wrapper">
+                            <div class="col-4 align-vertical-center">
                                 <label for="datepicker">Дата оформления вклада</label>
                             </div>
                             <div class="col-auto">
                                 <input type="text" id="datepicker" placeholder="дд.мм.гггг" name="date" required>
                             </div>
-                            <div class="col-auto label-wrapper is-invalid d-none" id="date_invalid">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                            <div class="col-auto align-vertical-center is-invalid d-none" id="date_invalid">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                                 </svg>
                                 <label>Неверный формат данных</label>
                             </div>
                         </div>
 
                         <div class="row form-row">
-                            <div class="col-4 label-wrapper">
+                            <div class="col-4 align-vertical-center">
                                 <label for="deposit_summ">Сумма вклада</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" id="deposit_summ" name="summ_deposit">
+                                <input type="text" id="deposit_summ" name="summ_deposit" value="1000">
                             </div>
-                            <div class="col-auto label-wrapper is-invalid d-none" id="summ_invalid">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                            <div class="col-3 align-vertical-center">
+                                <div class="w-100">
+                                    <input class="range-control" id="range_deposit_summ" type="range" min="1000" max="3000000" value="0">
+                                </div>
+                                <div class="range-desc w-100">
+                                    <div class="float-left">1 тыс. руб.</div>
+                                    <div class="float-right">3 000 000</div>
+                                </div>
+                            </div>
+                            <div class="col-auto align-vertical-center is-invalid d-none" id="summ_invalid">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                                 </svg>
                                 <label>Неверный формат данных</label>
                             </div>
+
                         </div>
 
                         <div class="row form-row">
-                            <div class="col-4 label-wrapper">
+                            <div class="col-4 align-vertical-center">
                                 <label for="deposit_term">Срок вклада</label>
                             </div>
                             <div class="col-auto">
@@ -122,31 +137,44 @@
                         </div>
 
                         <div class="row form-row">
-                            <div class="col-4 label-wrapper">
+                            <div class="col-4 align-vertical-center">
                                 <label for="deposit_refill">Пополнение вклада</label>
                             </div>
                             <div class="col-auto">
                                 <div class="form-check-inline">
-                                    <input class="form-check-input" type="radio" name="deposit_refill" id="deposit_refill_radio1" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="deposit_refill"
+                                           id="deposit_refill_radio1" value="0" checked>
                                     <label class="form-check-label" for="deposit_refill_radio1">Нет</label>
                                 </div>
                                 <div class="form-check-inline">
-                                    <input class="form-check-input" type="radio" name="deposit_refill" id="deposit_refill_radio2" value="1">
+                                    <input class="form-check-input" type="radio" name="deposit_refill"
+                                           id="deposit_refill_radio2" value="1">
                                     <label class="form-check-label" for="deposit_refill_radio2">Да</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row form-row">
-                            <div class="col-4 label-wrapper">
+                            <div class="col-4 align-vertical-center">
                                 <label for="deposit_refill_summ">Сумма пополнения вклада</label>
                             </div>
                             <div class="col-auto">
                                 <input type="text" id="deposit_refill_summ" name="deposit_refill_summ">
                             </div>
-                            <div class="col-auto label-wrapper is-invalid d-none" id="refill_summ_invalid">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                            <div class="col-3 align-vertical-center">
+                                <div class="w-100">
+                                    <input class="range-control" id="range_refill_summ" type="range" min="1000" max="3000000" value="0">
+                                </div>
+                                <div class="range-desc w-100">
+                                    <div class="float-left">1 тыс. руб.</div>
+                                    <div class="float-right">3 000 000</div>
+                                </div>
+                            </div>
+                            <div class="col-auto align-vertical-center is-invalid d-none" id="refill_summ_invalid">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                                 </svg>
                                 <label>Неверный формат данных</label>
                             </div>
@@ -191,8 +219,9 @@
     </div>
 </footer>
 
-<script src="src/js/script.js"></script>
 <script src="src/js/jquery-3.5.1.js"></script>
+<script src="src/js/script.js"></script>
+<script src="src/js/rangeslider.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
@@ -207,6 +236,10 @@
         $("#datepicker").datepicker({
             dateFormat: "dd.mm.yy"
         });
+    });
+
+    $(".range-control").rangeslider({
+        polyfill: false
     });
 </script>
 <!-- BODY END -->

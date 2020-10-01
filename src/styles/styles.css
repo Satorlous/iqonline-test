@@ -195,7 +195,7 @@ body {
     color: rgb(61,106,12);
 }
 
-.label-wrapper {
+.align-vertical-center {
     display: flex;
     align-items: center !important;
     justify-content: flex-end;
@@ -214,4 +214,14 @@ svg {
     color: red;
     font-size: 0.75em;
     font-style: italic;
+}
+
+.range-desc {
+    position: absolute;
+    top: 25px;
+    color: grey;
+    font-style: italic;
+    font-size: 0.7em;
+    width: 100%;
+    padding-left: 10px;
 }
